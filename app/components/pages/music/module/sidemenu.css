@@ -1,0 +1,7 @@
+.active {
+  background-color: #eeeeee;
+  border-radius: 10px;
+}
+.cursor {
+  cursor: pointer;
+}
