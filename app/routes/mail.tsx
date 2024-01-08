@@ -1,7 +1,8 @@
+import PagesMail from "~/components/pages/mail";
 export default function Mail() {
   return (
     <div>
-      <h1>Mail</h1>
+      <PagesMail />
     </div>
   );
 }
