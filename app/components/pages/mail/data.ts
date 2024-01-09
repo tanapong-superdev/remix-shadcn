@@ -34,7 +34,6 @@ export async function read(id: number) {
   const mail = Mail().get(id);
   if (mail) {
     mail.unread = false;
-    console.log(mail);
   }
 }
 export async function getMail(id: number) {

@@ -19,7 +19,6 @@ export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 export async function loader({ request }: LoaderFunctionArgs) {
-  console.log("ttttt");
   return json({ title: "TurboXApp" });
 }
 export default function App() {
