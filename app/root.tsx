@@ -1,6 +1,6 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
 import LayoutHeader from "~/components/layouts/header";
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -8,15 +8,20 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  json,
 } from "@remix-run/react";
 import styles from "./tailwind.css";
 import "./main.css";
 import type { Menu } from "~/components/layouts/header";
+
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
-
+export async function loader({ request }: LoaderFunctionArgs) {
+  console.log("ttttt");
+  return json({ title: "TurboXApp" });
+}
 export default function App() {
   const title = "TurboXApp";
   const menus: Menu[] = [
