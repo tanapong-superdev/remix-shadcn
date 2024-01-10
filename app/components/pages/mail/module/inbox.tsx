@@ -4,6 +4,7 @@ import {
   NavLink,
   redirect,
   useLoaderData,
+  useLocation,
   useRevalidator,
   useSearchParams,
 } from "@remix-run/react";
@@ -19,11 +20,11 @@ export default function PagesMailModuleInbox() {
     q: string;
     mailId: string;
   }>();
-
+  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [tab, setSetTab] = useState<"all" | "unread">("all");
   const [stateQuery, setStateQuery] = useState(q);
-  const [stateLoading, setStateLoading] = useState(true);
+  const [stateLoading, setStateLoading] = useState(false);
   const [mailState, setMailState] = useState<number>(+mailId);
   const unreadMail = mails.filter((mail) => mail.unread);
   const [mailUnread, setMailUnread] = useState<Mail[]>(unreadMail as Mail[]);
@@ -43,6 +44,12 @@ export default function PagesMailModuleInbox() {
       setStateLoading(false);
     }, 1000);
   }
+  useEffect(() => {
+    console.log("set mail link");
+    if (mailId) {
+      setMailLink(+mailId);
+    }
+  }, [location]);
   async function setMailLink(mailId: number) {
     setMailState(mailId);
     if (tab === "all") {

@@ -22,7 +22,6 @@ export default function PagesMail() {
   const location = useLocation();
   const params = useParams();
   useEffect(() => {
-    console.log(params);
     if (params.mailId) {
       setMailIdState(params.mailId);
     } else {
