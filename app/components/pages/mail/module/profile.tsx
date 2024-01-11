@@ -1,5 +1,5 @@
-import { useParams } from "@remix-run/react";
-import { useEffect, useState } from "react";
+import { useNavigation } from "@remix-run/react";
+import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Skeleton } from "~/components/ui/skeleton";
 export type ProfileProps = {
@@ -12,18 +12,15 @@ export default function PagesMailModuleProfile({
   email,
   subject,
 }: ProfileProps) {
-  const [loading, setLoading] = useState(false);
-  const params = useParams();
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, [params]);
+  const navigation = useNavigation();
+  // const [loading, setLoading] = useState(true);
+  // setTimeout(() => {
+  //   setLoading(false);
+  // }, 1000);
 
   return (
     <div>
-      {loading ? (
+      {navigation.state === "loading" ? (
         <div className="flex h-[56px] items-center space-x-4">
           <Skeleton className="h-12 w-12 rounded-full" />
           <div className="space-y-1">

@@ -4,22 +4,19 @@ import { Textarea } from "~/components/ui/textarea";
 import { Switch } from "~/components/ui/switch";
 import { Label } from "~/components/ui/label";
 import { Button } from "~/components/ui/button";
-import { useLoaderData, useParams } from "@remix-run/react";
+import { useLoaderData, useNavigation, useParams } from "@remix-run/react";
 import { type Mail } from "~/components/pages/mail/data";
 import { Skeleton } from "~/components/ui/skeleton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 export default function PagesMailModuleContent() {
   const { mail } = useLoaderData<{
     mail: Mail;
   }>();
-  const [loading, setLoading] = useState(false);
-  const params = useParams();
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, [params]);
+  const navigation = useNavigation();
+  // const [loading, setLoading] = useState(true);
+  // setTimeout(() => {
+  //   setLoading(false);
+  // }, 1000);
   return (
     <div className="h-full">
       <PagesMailModuleMenuContent></PagesMailModuleMenuContent>
@@ -43,7 +40,7 @@ export default function PagesMailModuleContent() {
         className="flex flex-col  "
       >
         <div className="flex-1 overflow-y-scroll py-4 px-3">
-          {loading ? (
+          {navigation.state === "loading" ? (
             <div className="flex   w-full space-x-4">
               <div className="space-y-2">
                 <Skeleton className="h-4  w-[600px]" />

@@ -9,6 +9,7 @@ import {
   Scripts,
   ScrollRestoration,
   json,
+  useNavigation,
 } from "@remix-run/react";
 import styles from "./tailwind.css";
 import "./main.css";
@@ -18,10 +19,12 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
+
 export async function loader({ request }: LoaderFunctionArgs) {
   return json({ title: "TurboXApp" });
 }
 export default function App() {
+  const navigation = useNavigation();
   const title = "TurboXApp";
   const menus: Menu[] = [
     { title: "Dashboard", to: "/" },
@@ -41,12 +44,19 @@ export default function App() {
       </head>
       <body>
         <LayoutHeader title={title} menus={menus}></LayoutHeader>
+
+        {navigation.state === "loading" ? (
+          <div className="loading-bar">
+            <div className="loading-bar-progress"></div>
+          </div>
+        ) : (
+          ""
+        )}
         <div className="container h-full  mx-auto px-3 sm:px-6 lg:px-3">
           <div className="mt-6 h-full">
             <Outlet />
           </div>
         </div>
-
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
