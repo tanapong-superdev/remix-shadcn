@@ -58,9 +58,9 @@ export default function PagesMailModuleInbox() {
   async function setMailLink(mailId: number) {
     setMailState(mailId);
     if (tab === "all") {
-      setTimeout(() => {
-        revalidator.revalidate();
-      });
+      // setTimeout(() => {
+      //   revalidator.revalidate();
+      // });
     } else {
       const findMail = mails.find((mail) => mail.id === mailId);
 
