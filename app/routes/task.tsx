@@ -1,7 +1,9 @@
+import PagesTask from "~/components/pages/task";
+
 export default function Task() {
   return (
     <div>
-      <h1>Task</h1>
+      <PagesTask />
     </div>
   );
 }
