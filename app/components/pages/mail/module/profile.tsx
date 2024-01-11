@@ -12,7 +12,7 @@ export default function PagesMailModuleProfile({
   email,
   subject,
 }: ProfileProps) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const params = useParams();
   useEffect(() => {
     setLoading(true);
