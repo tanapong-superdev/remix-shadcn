@@ -29,6 +29,7 @@ export default function PagesMailModuleInbox() {
   const [mailState, setMailState] = useState<number>(+mailId);
   const unreadMail = mails.filter((mail) => mail.unread);
   const [mailUnread, setMailUnread] = useState<Mail[]>(unreadMail as Mail[]);
+  const [mailData, setMailData] = useState<Mail[]>(mails as Mail[]);
   let revalidator = useRevalidator();
   const params = useParams();
   useEffect(() => {
@@ -57,7 +58,13 @@ export default function PagesMailModuleInbox() {
   }, [location]);
   async function setMailLink(mailId: number) {
     setMailState(mailId);
+    const findMail = mails.find((mail) => mail.id === mailId);
     if (tab === "all") {
+      if (findMail) {
+        findMail.unread = false;
+        setMailData([...mailData]);
+      }
+      // mailData([...mails]);
       // setTimeout(() => {
       //   revalidator.revalidate();
       // });
