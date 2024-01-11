@@ -70,7 +70,7 @@ export default function SharedListUser() {
                   </div>
                 </div>
               ) : (
-                <div className="flex items-centerx ">
+                <div className="flex ">
                   <div className="flex flex-1 space-x-4">
                     <Avatar>
                       <AvatarImage

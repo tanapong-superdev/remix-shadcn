@@ -14,10 +14,10 @@ import { NavLink } from "@remix-run/react";
 
 let isHydrating = true;
 export default function LayoutHeader({ title, description, menus }: Props) {
-  const [isHydrated, setIsHydrated] = useState(!isHydrating);
   title = title || "MyApp";
   description = description || "Remix Starter";
   menus = menus || [];
+  const [isHydrated, setIsHydrated] = useState(!isHydrating);
   useEffect(() => {
     isHydrating = false;
     setIsHydrated(true);
