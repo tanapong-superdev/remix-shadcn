@@ -12,7 +12,7 @@ export default function PagesMailModuleContent() {
   const { mail } = useLoaderData<{
     mail: Mail;
   }>();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const params = useParams();
   useEffect(() => {
     setLoading(true);

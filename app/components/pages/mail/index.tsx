@@ -27,7 +27,6 @@ import {
   IconShoppingCart,
   IconArchiveFill,
 } from "~/components/icons/icon";
-import { set } from "date-fns";
 
 export default function PagesMail() {
   const { mailId } = useLoaderData<{ mailId: string }>();
