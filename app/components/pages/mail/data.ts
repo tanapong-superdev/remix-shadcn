@@ -1,4 +1,4 @@
-import { faker } from "@faker-js/faker";
+import { faker } from "@faker-js/faker/locale/en";
 export type Mail = {
   id?: number;
   from?: string;
@@ -9,6 +9,7 @@ export type Mail = {
   date?: Date;
 };
 const mails: Mail[] = [];
+
 export default function Mail() {
   function getAll() {
     return mails;
@@ -40,13 +41,14 @@ export async function getMail(id: number) {
   return Mail().get(id);
 }
 const mail = Mail();
+
 Array.from({ length: 100 }, (_, index) => {
   mail.addMail({
     id: index + 1,
-    from: faker.person.firstName() + " " + faker.person.lastName(),
+    from: faker.person.fullName(),
     email: faker.internet.email(),
     to: faker.internet.email(),
-    subject: faker.lorem.sentence(),
+    subject: faker.lorem.sentence(3),
     unread: true,
     body: faker.lorem.paragraph(),
     date: faker.date.past(),

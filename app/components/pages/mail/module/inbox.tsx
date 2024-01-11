@@ -5,6 +5,7 @@ import {
   redirect,
   useLoaderData,
   useLocation,
+  useParams,
   useRevalidator,
   useSearchParams,
 } from "@remix-run/react";
@@ -24,11 +25,12 @@ export default function PagesMailModuleInbox() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [tab, setSetTab] = useState<"all" | "unread">("all");
   const [stateQuery, setStateQuery] = useState(q);
-  const [stateLoading, setStateLoading] = useState(false);
+  const [stateLoading, setStateLoading] = useState(true);
   const [mailState, setMailState] = useState<number>(+mailId);
   const unreadMail = mails.filter((mail) => mail.unread);
   const [mailUnread, setMailUnread] = useState<Mail[]>(unreadMail as Mail[]);
   let revalidator = useRevalidator();
+  const params = useParams();
   useEffect(() => {
     if (stateQuery === null) return;
     setSearchParams({ q: stateQuery as string });
@@ -46,8 +48,11 @@ export default function PagesMailModuleInbox() {
   }
   useEffect(() => {
     console.log("set mail link");
-    if (mailId) {
-      setMailLink(+mailId);
+
+    if (params.mailId) {
+      setMailLink(+params.mailId);
+    } else {
+      setMailLink(0);
     }
   }, [location]);
   async function setMailLink(mailId: number) {
@@ -74,7 +79,7 @@ export default function PagesMailModuleInbox() {
   }
 
   return (
-    <div className=" border-l border-r ">
+    <div>
       <Tabs defaultValue="all">
         <div>
           <div className="flex   items-center w-full p-3">

@@ -4,13 +4,22 @@ import { Textarea } from "~/components/ui/textarea";
 import { Switch } from "~/components/ui/switch";
 import { Label } from "~/components/ui/label";
 import { Button } from "~/components/ui/button";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useParams } from "@remix-run/react";
 import { type Mail } from "~/components/pages/mail/data";
+import { Skeleton } from "~/components/ui/skeleton";
+import { useEffect, useState } from "react";
 export default function PagesMailModuleContent() {
   const { mail } = useLoaderData<{
     mail: Mail;
   }>();
-  console.log(mail);
+  const [loading, setLoading] = useState(true);
+  const params = useParams();
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, [params]);
   return (
     <div className="h-full">
       <PagesMailModuleMenuContent></PagesMailModuleMenuContent>
@@ -24,7 +33,7 @@ export default function PagesMailModuleContent() {
               email={mail.to}
             ></PagesMailModuleProfile>
           </div>
-          <div className="ml-auto text-xs text-muted-foreground">
+          <div className="ml-autox line-clamp-1  text-xs text-muted-foreground">
             {mail.date}
           </div>
         </div>
@@ -33,7 +42,20 @@ export default function PagesMailModuleContent() {
         style={{ height: "calc(100vh - 286px)" }}
         className="flex flex-col  "
       >
-        <div className="flex-1 overflow-y-scroll py-4 px-3">{mail.body}</div>
+        <div className="flex-1 overflow-y-scroll py-4 px-3">
+          {loading ? (
+            <div className="flex   w-full space-x-4">
+              <div className="space-y-2">
+                <Skeleton className="h-4  w-[600px]" />
+
+                <Skeleton className="h-4 w-[600px]" />
+                <Skeleton className="h-4 w-[600px]" />
+              </div>
+            </div>
+          ) : (
+            mail.body
+          )}
+        </div>
         <div className="py-4 flex gap-4 flex-col px-3">
           <Textarea
             placeholder="Type your message here."
