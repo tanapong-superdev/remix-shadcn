@@ -9,6 +9,8 @@ import {
   SortingState,
   getSortedRowModel,
   VisibilityState,
+  PaginationState,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
 
 import {
@@ -20,23 +22,20 @@ import {
   TableRow,
 } from "~/components/ui/table";
 import { Input } from "~/components/ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
-import { Button } from "~/components/ui/button";
 import DataTablePagination from "~/components/pages/task/module/pagination";
 import DataTableViewOptions from "~/components/pages/task/module/view-option";
-import { useState } from "react";
-interface DataTableProps<TData, TValue> {
+import { useEffect, useState } from "react";
+interface CustomProps {
+  onTableChange: (table: any) => void;
+}
+interface DataTableProps<TData, TValue> extends CustomProps {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 export default function PagesTaskModuleTable<TData, TValue>({
   columns,
   data,
+  onTableChange,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -52,6 +51,7 @@ export default function PagesTaskModuleTable<TData, TValue>({
     onRowSelectionChange: setRowSelection,
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
+    getPaginationRowModel: getPaginationRowModel(),
     state: {
       sorting,
       columnFilters,
@@ -59,20 +59,12 @@ export default function PagesTaskModuleTable<TData, TValue>({
       rowSelection,
     },
   });
+  useEffect(() => {
+    onTableChange(table);
+  }, [table, columnVisibility]);
 
   return (
     <div>
-      <div className="flex items-center  py-4">
-        <Input
-          placeholder="Filter Task..."
-          value={(table.getColumn("task")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("task")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-        <DataTableViewOptions table={table} />
-      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -80,7 +72,10 @@ export default function PagesTaskModuleTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      style={{ width: header.getSize() + "px" }}
+                      key={header.id}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(

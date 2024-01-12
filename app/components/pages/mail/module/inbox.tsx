@@ -48,8 +48,6 @@ export default function PagesMailModuleInbox() {
     }, 1000);
   }
   useEffect(() => {
-    console.log("set mail link");
-
     if (params.mailId) {
       setMailLink(+params.mailId);
     } else {
