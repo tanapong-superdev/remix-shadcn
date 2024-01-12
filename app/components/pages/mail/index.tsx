@@ -97,7 +97,6 @@ export default function PagesMail() {
     }
   }, [location]);
   function checkSize() {
-    console.log(window.innerWidth);
     if (window.innerWidth <= 767) {
       setIsMobile(true);
       setToggleMenu(true);
