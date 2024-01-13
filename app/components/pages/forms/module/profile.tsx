@@ -98,7 +98,7 @@ export default function PagesFormsProfile() {
   return (
     <div>
       <div className="flex flex-col">
-        <h3 className="text-lg font-medium">Profile</h3>
+        <span className="text-lg font-medium">Profile</span>
         <p className="text-sm text-muted-foreground">
           This is how others will see you on the site.
         </p>

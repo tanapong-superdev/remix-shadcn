@@ -7,7 +7,22 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import { Skeleton } from "~/components/ui/skeleton";
-export default function SharedSummary() {
+export type SharedSummaryProps = {
+  title?: string;
+  description?: string;
+  value?: string;
+  IconSummary?: any;
+};
+export default function SharedSummary({
+  title,
+  description,
+  value,
+  IconSummary,
+}: SharedSummaryProps) {
+  title = title || "Title";
+  description = description || "Description";
+  value = value || "value";
+
   const [loading, setLoading] = useState(true);
   setTimeout(() => {
     setLoading(false);
@@ -28,14 +43,12 @@ export default function SharedSummary() {
       ) : (
         <CardHeader>
           <CardTitle className="flex">
-            <span className="text-sm flex-1 font-medium">Total Revenue</span>
-            <span className="text-lg">$</span>
+            <span className="text-sm flex-1 font-medium">{title}</span>
+            {IconSummary ? <IconSummary></IconSummary> : null}
           </CardTitle>
           <CardDescription className="flex flex-col">
-            <span className="text-2xl text-black font-black">$45,231.89</span>
-            <span className="font-medium text-gray">
-              +20.1% from last month
-            </span>
+            <span className="text-2xl text-black font-black">{value}</span>
+            <span className="font-medium text-gray">{description}</span>
           </CardDescription>
         </CardHeader>
       )}

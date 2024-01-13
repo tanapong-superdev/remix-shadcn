@@ -32,7 +32,6 @@ export default function PagesMusicModuleGallery({
   height = height || 333;
   image = image || "https://picsum.photos/250/333";
   isSmall = isSmall || false;
-  // console.log(gallery);
 
   setTimeout(() => {
     setImageLoaded(false);

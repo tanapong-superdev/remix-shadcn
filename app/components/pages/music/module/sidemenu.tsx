@@ -16,14 +16,15 @@ export default function PagesMusicModuleSidemenu({ menu }: SideMenuProps) {
   return (
     <div className="flex  flex-col">
       <ul className="flex gap-6 flex-col">
-        {menu.map((item) => (
-          <div>
+        {menu.map((item, key) => (
+          <div key={key}>
             <li className="flex px-3 py-1 cursor mb-2  text-lg font-semibold tracking-tight  items-center">
               {item.title}
             </li>
             <ul className="flex flex-col gap-2">
-              {item.menu.map((menu) => (
+              {item.menu.map((menu, index) => (
                 <li
+                  key={index}
                   className={`flex px-3 py-1 cursor flex cursor  py-2 px-3   items-center  items-center ${
                     menu.active ? "active" : ""
                   } `}
