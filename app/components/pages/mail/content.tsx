@@ -13,10 +13,6 @@ export default function PagesMailModuleContent() {
     mail: Mail;
   }>();
   const navigation = useNavigation();
-  // const [loading, setLoading] = useState(true);
-  // setTimeout(() => {
-  //   setLoading(false);
-  // }, 1000);
   return (
     <div className="h-full">
       <PagesMailModuleMenuContent></PagesMailModuleMenuContent>
