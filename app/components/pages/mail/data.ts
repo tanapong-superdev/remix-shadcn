@@ -7,6 +7,7 @@ export type Mail = {
   unread?: boolean;
   body?: string;
   date?: Date;
+  tags?: string[];
 };
 const mails: Mail[] = [];
 
@@ -41,7 +42,12 @@ export async function getMail(id: number) {
   return Mail().get(id);
 }
 const mail = Mail();
-
+function generateRandomTags(maxTags = 3) {
+  const allTags = ["meeting", "work", "important"]; // เพิ่ม tags ตามต้องการ
+  const numTags = Math.floor(Math.random() * maxTags) + 1;
+  const shuffledTags = allTags.sort(() => 0.5 - Math.random());
+  return shuffledTags.slice(0, numTags);
+}
 Array.from({ length: 100 }, (_, index) => {
   mail.addMail({
     id: index + 1,
@@ -52,5 +58,6 @@ Array.from({ length: 100 }, (_, index) => {
     unread: true,
     body: faker.lorem.paragraph(),
     date: faker.date.past(),
+    tags: generateRandomTags(),
   });
 });
