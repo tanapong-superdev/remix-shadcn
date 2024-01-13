@@ -21,11 +21,11 @@ export const links: LinksFunction = () => [
 ];
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  return json({ title: "TurboXApp" });
+  return json({ title: "MyApp" });
 }
 export default function App() {
   const navigation = useNavigation();
-  const title = "TurboXApp";
+  const title = "MyApp";
   const menus: Menu[] = [
     { title: "Dashboard", to: "/" },
     { title: "Music", to: "/music" },
