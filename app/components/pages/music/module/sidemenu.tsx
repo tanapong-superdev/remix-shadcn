@@ -1,35 +1,43 @@
-import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import "./sidemenu.css";
-export default function PagesMusicModuleSidemenu() {
+export type SideMenu = {
+  title: string;
+  menu: {
+    lable: string;
+    icon: any;
+    active?: boolean;
+  }[];
+};
+export type SideMenuProps = {
+  menu: SideMenu[];
+};
+
+export default function PagesMusicModuleSidemenu({ menu }: SideMenuProps) {
+  menu = menu || [];
   return (
-    <Card>
-      <CardHeader className="text-xl px-3 py-3  font-bold">Discover</CardHeader>
-      <CardContent className="px-3">
-        <div className="flex flex-col">
-          <ul className="flex flex-col gap-3">
-            <li className="flex cursor font-bold active py-2 px-3   items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="mr-2 h-4 w-4"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <polygon points="10 8 16 12 10 16 10 8"></polygon>
-              </svg>
-              Listen Now
+    <div className="flex  flex-col">
+      <ul className="flex gap-6 flex-col">
+        {menu.map((item) => (
+          <div>
+            <li className="flex px-3 py-1 cursor mb-2  text-lg font-semibold tracking-tight  items-center">
+              {item.title}
             </li>
-            <li className="flex px-3 py-1 cursor  items-center">Radio</li>
-            <li className="flex px-3 py-1 cursor  items-center">
-              New Releases
-            </li>
-          </ul>
-        </div>
-      </CardContent>
-    </Card>
+            <ul className="flex flex-col gap-2">
+              {item.menu.map((menu) => (
+                <li
+                  className={`flex px-3 py-1 cursor flex cursor  py-2 px-3   items-center  items-center ${
+                    menu.active ? "active" : ""
+                  } `}
+                >
+                  <span className="mr-2">
+                    <menu.icon></menu.icon>
+                  </span>
+                  {menu.lable}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </ul>
+    </div>
   );
 }
