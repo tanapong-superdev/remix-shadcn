@@ -19,7 +19,6 @@ import {
 } from "~/components/ui/popover";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -28,7 +27,6 @@ import {
 } from "~/components/ui/dialog";
 import { useState } from "react";
 import PagesDashboardModuleForm from "~/components/pages/dashboard/module/form";
-import { set } from "date-fns";
 
 const accounts = [
   { id: "1", value: "Alicia Koch", type: "personal" },
