@@ -62,10 +62,6 @@ export default function PagesMailModuleInbox() {
         findMail.unread = false;
         setMailData([...mailData]);
       }
-      // mailData([...mails]);
-      // setTimeout(() => {
-      //   revalidator.revalidate();
-      // });
     } else {
       const findMail = mails.find((mail) => mail.id === mailId);
 
@@ -151,6 +147,7 @@ export default function PagesMailModuleInbox() {
                             subject={mail.subject}
                             body={mail.body}
                             active={mailState === mail.id}
+                            tags={mail.tags}
                           ></PagesMailModuleInboxCard>
                         </NavLink>
                       </div>
@@ -207,6 +204,7 @@ export default function PagesMailModuleInbox() {
                             subject={mail.subject}
                             body={mail.body}
                             active={mailState === mail.id}
+                            tags={mail.tags}
                           ></PagesMailModuleInboxCard>
                         </NavLink>
                       </div>
