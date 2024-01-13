@@ -1,4 +1,4 @@
-import PagesFormsProfile from "~/components/pages/forms/profile";
+import PagesFormsProfile from "~/components/pages/forms/module/profile";
 export default function PagesFormsIndex() {
   return (
     <div>

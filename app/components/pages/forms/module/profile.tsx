@@ -22,7 +22,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useFieldArray, Controller } from "react-hook-form";
-import { useState } from "react";
+import { toast } from "~/components/ui/use-toast";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -43,9 +43,6 @@ const formSchema = z.object({
     .max(160, {
       message: "Bio must not be longer than 30 characters.",
     }),
-  //   inputs: z.string().min(2, {
-  //     message: "Username must be at least 2 characters.",
-  //   }),
   urls: z.array(
     z.object({
       value: z.string().refine(
@@ -80,7 +77,7 @@ export default function PagesFormsProfile() {
 
   const {
     control,
-    formState: { isValid, errors, isValidating, isDirty },
+    formState: { errors },
   } = form;
 
   const { fields, append } = useFieldArray({
@@ -88,6 +85,14 @@ export default function PagesFormsProfile() {
     control,
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
+    toast({
+      title: "You submitted the following values:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
+        </pre>
+      ),
+    });
     console.log(values);
   }
   return (

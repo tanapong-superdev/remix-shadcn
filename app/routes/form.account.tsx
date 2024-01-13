@@ -1,3 +1,8 @@
+import PagesFormsModuleAccount from "~/components/pages/forms/module/account";
 export default function PagesFormsAccount() {
-  return <div>Account</div>;
+  return (
+    <div>
+      <PagesFormsModuleAccount></PagesFormsModuleAccount>
+    </div>
+  );
 }
