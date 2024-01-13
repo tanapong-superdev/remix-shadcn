@@ -14,7 +14,7 @@ import {
 import styles from "./tailwind.css";
 import "./main.css";
 import type { Menu } from "~/components/layouts/header";
-
+import { Toaster } from "~/components/ui/toaster";
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -57,6 +57,7 @@ export default function App() {
             <Outlet />
           </div>
         </div>
+        <Toaster />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
