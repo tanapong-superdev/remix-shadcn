@@ -45,6 +45,7 @@ export default function Index() {
   const tabs: string[] = ["Overview", "Analytics", "Reports", "Notifications"];
   return (
     <div>
+      <a href="https://remix-shadcn-ui-tanapong.vercel.app">Test Link</a>
       <div className="flex">
         <div className="flex-1 ">
           <div className="flex items-center">
